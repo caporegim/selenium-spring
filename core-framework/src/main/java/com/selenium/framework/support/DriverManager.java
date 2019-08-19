@@ -10,14 +10,13 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -28,6 +27,16 @@ public class DriverManager {
 
     @Value("${selenium-grid-url}")
     private String remoteURL;
+
+    private final ChromeOptions chromeOptions;
+
+    private final DriverConfiguration driverConfiguration;
+
+    @Autowired
+    public DriverManager(ChromeOptions chromeOptions, DriverConfiguration driverConfiguration) {
+        this.chromeOptions = chromeOptions;
+        this.driverConfiguration = driverConfiguration;
+    }
 
     @Bean
     public WebDriver createWebDriver() {
@@ -46,25 +55,16 @@ public class DriverManager {
                 driver = createRemoteWebDriver();
                 break;
         }
+        driverConfiguration.configure(driver);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         return driver;
     }
 
     private WebDriver createChromeDriver() {
-        WebDriverManager.chromedriver().version("75").setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("test-type");
-        options.addArguments("--start-maximized");
-        options.addArguments("disable-extensions");
-        options.addArguments("--disable-infobars");
-        options.setExperimentalOption("useAutomationExtension", false);
-
-        Map<String, String> mobileEmulation = new HashMap<>();
-        mobileEmulation.put("deviceName", "Nexus 5");
-        options.setExperimentalOption("mobileEmulation", mobileEmulation);
-
-        return new ChromeDriver(options);
+        //WebDriverManager.chromedriver().version("76").setup();
+        return new ChromeDriver(chromeOptions);
     }
+
 
     private WebDriver createIEDriver() {
         InternetExplorerOptions options = new InternetExplorerOptions();

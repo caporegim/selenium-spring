@@ -24,6 +24,7 @@ public class BaseTest {
     @Value("${base.url}")
     private String baseUrl;
 
+
     @BeforeEach
     public void beforeEach() {
         driver.get(baseUrl);

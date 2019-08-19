@@ -11,6 +11,7 @@
     <modules>
         <module>../core-framework</module>
         <module>../module-test</module>
+        <module>../module2-test</module>
     </modules>
 
 
@@ -25,8 +26,9 @@
         <junit.platform.version>1.1.0</junit.platform.version>
         <selenium.version>3.14.0</selenium.version>
         <spring.version>5.1.0.RELEASE</spring.version>
-        <webdrivermanager>3.0.0</webdrivermanager>
+        <webdrivermanager>3.6.2</webdrivermanager>
         <slf4j.version>1.7.25</slf4j.version>
+        <lombok.version>1.18.8</lombok.version>
     </properties>
     <dependencyManagement>
         <dependencies>

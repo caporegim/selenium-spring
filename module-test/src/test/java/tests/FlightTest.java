@@ -2,10 +2,13 @@ package tests;
 
 import com.selenium.steps.FlightStatusSteps;
 import com.selenium.steps.HomeSteps;
+import com.selenium.support.ModuleSpecificConfiguration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 
+@ContextConfiguration(classes = {ModuleSpecificConfiguration.class})
 class FlightTest extends BaseTest {
 
     @Autowired

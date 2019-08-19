@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.selenium.test</groupId>
+    <groupId>com.selenium.app</groupId>
     <artifactId>app1-test</artifactId>
 
     <dependencies>
