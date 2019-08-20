@@ -22,6 +22,11 @@ public class FlightStatusPage extends BasePage {
         super(driver);
     }
 
+    @Override
+    public String getPageUrl() {
+        return "";
+    }
+
     public FlightStatusPage selectFlightNumber() {
         clickOn(radioFlightNumber);
         return this;

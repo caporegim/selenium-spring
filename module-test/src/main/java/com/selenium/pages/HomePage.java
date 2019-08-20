@@ -18,6 +18,11 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
+    @Override
+    public String getPageUrl() {
+        return "";
+    }
+
     public void openFlightStatus() {
         clickOn(lnkFlightStatus);
     }
