@@ -38,9 +38,9 @@ public abstract class BasePage extends PageActions {
         return Optional.ofNullable(result).orElseThrow(() -> new RuntimeException("Clickable element returned null."));
     }
 
-    public void sleep(long millieseconds){
+    public void sleepSeconds(long seconds){
         try {
-            Thread.sleep(millieseconds);
+            Thread.sleep(seconds * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -51,14 +51,14 @@ public class LoginPage extends BasePage {
 
     public void clickOnLoginUsingPassword() {
         sendKey(okButton, Keys.SPACE);
-        sleep(1000);
+        sleepSeconds(1);
         clickOn(loginUsingPassword);
         stationId.sendKeys(credentials.getAppStationId());
         usernamePopUp.sendKeys(credentials.getAppUsername());
         passwordPopUp.sendKeys(credentials.getAppPassword());
         profileIdPopUp.sendKeys(credentials.getAppRole());
         loginButton.sendKeys(Keys.ENTER);
-        sleep(3000);
+        sleepSeconds(3);
     }
 
 
