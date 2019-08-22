@@ -22,8 +22,9 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.plugin>1.8</maven.compiler.plugin>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>5.1.0</junit.version>
-        <junit.platform.version>1.1.0</junit.platform.version>
+        <junit.version>5.5.1</junit.version>
+        <junit.platform.version>1.5.1</junit.platform.version>
+        <junit.api.version>5.5.1</junit.api.version>
         <selenium.version>3.14.0</selenium.version>
         <spring.version>5.1.0.RELEASE</spring.version>
         <webdrivermanager>3.6.2</webdrivermanager>
@@ -41,6 +42,11 @@
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-runner</artifactId>
                 <version>${junit.platform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit.api.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>

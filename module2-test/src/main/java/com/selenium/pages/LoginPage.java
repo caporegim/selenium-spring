@@ -5,7 +5,6 @@ import com.selenium.support.Credentials;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,11 +15,9 @@ public class LoginPage extends BasePage {
     private Credentials credentials;
 
     @FindBy(id = "warning-modal-ok-btn")
-    @CacheLookup
     private WebElement okButton;
 
     @FindBy(css = "div.panel-footer > a")
-    @CacheLookup
     private WebElement loginUsingPassword;
 
     @FindBy(id = "stationIdPopUp")
@@ -53,12 +50,16 @@ public class LoginPage extends BasePage {
         sendKey(okButton, Keys.SPACE);
         sleepSeconds(1);
         clickOn(loginUsingPassword);
+        stationId.clear();
         stationId.sendKeys(credentials.getAppStationId());
+        usernamePopUp.clear();
         usernamePopUp.sendKeys(credentials.getAppUsername());
+        passwordPopUp.clear();
         passwordPopUp.sendKeys(credentials.getAppPassword());
+        profileIdPopUp.clear();
         profileIdPopUp.sendKeys(credentials.getAppRole());
+        sleepSeconds(1);
         loginButton.sendKeys(Keys.ENTER);
-        sleepSeconds(3);
     }
 
 
