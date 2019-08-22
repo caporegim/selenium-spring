@@ -20,10 +20,11 @@ public class Module2SpecificConfiguration {
     private String proxyPassword;
 
     private final ChromeBasicAuthHelper chromeBasicAuthHelper = new ChromeBasicAuthHelper();
+
     @Bean
     public ChromeOptions createChromeOptions() {
         ChromeOptions options = new ChromeOptions();
-        if(chromeBasicAuthHelper.getExtensionFile() != null) {
+        if (chromeBasicAuthHelper.getExtensionFile() != null) {
             options.addExtensions(chromeBasicAuthHelper.getExtensionFile());
         }
         return options;
@@ -31,11 +32,11 @@ public class Module2SpecificConfiguration {
 
     @Bean
     @Primary
-    public DriverConfiguration createDriverConfiguration(){
+    public DriverConfiguration createDriverConfiguration() {
         return webDriver -> {
-            //webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-            //webDriver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-            webDriver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
+            webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            webDriver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+            webDriver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
             ChromeBasicAuthHelper.configureAuth(webDriver, proxyUsername, proxyPassword);
         };
     }

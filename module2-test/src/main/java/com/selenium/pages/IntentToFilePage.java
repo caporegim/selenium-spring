@@ -19,20 +19,31 @@ public class IntentToFilePage extends BasePage {
     @FindBy(id = "saveNewIntentToFileTemplateButton")
     private WebElement saveButton;
 
+    @FindBy(id = "center-content")
+    private WebElement centerContent;
+
+    @FindBy(id = "intentToFileSuccess")
+    private WebElement operationSuccessElement;
+
 
     protected IntentToFilePage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public String getPageUrl() {
+    public String getPageUrlEnd() {
         return "intentToFile";
     }
 
     public void createNewIntentToFile() {
+        goToLastOpenWindow();
         intentToFileButton.click();
         receivedDateInput.sendKeys("08/01/2019");
         saveButton.click();
+    }
+
+    public boolean operationWasSuccessfull() {
+        return operationSuccessElement.isDisplayed();
     }
 
 

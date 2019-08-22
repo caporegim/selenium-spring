@@ -13,8 +13,12 @@ public class IntentToFileStep {
     private SearchVeteranStep searchVeteranStep;
 
     public void intentToFile() {
-        searchVeteranStep.gotToIntentToFile();
+        searchVeteranStep.searchVeteran()
+                .gotToIntentToFile();
         intentToFilePage.createNewIntentToFile();
     }
 
+    public IntentToFilePage getIntentToFilePage() {
+        return intentToFilePage;
+    }
 }

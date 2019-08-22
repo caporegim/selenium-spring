@@ -23,27 +23,28 @@ public class WorkQueuePage extends BasePage {
     @FindBy(id = "vetProfileButton")
     private WebElement openProfileButton;
 
-    @FindBy(id="intent_to_file")
+    @FindBy(id = "intent_to_file")
     private WebElement intentToFileLink;
+
+    @FindBy(css = "html head title")
+    private WebElement pageTitle;
+
 
     protected WorkQueuePage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public String getPageUrl() {
+    public String getPageUrlEnd() {
         return "workQueueInbox";
-    }
-
-    public boolean isLoaded() {
-        return driver.getCurrentUrl().contains(getPageUrl());
     }
 
     public WorkQueuePage searchVeteran() {
         try {
             wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("toggleSearchBarButton")));
             searchDropDown.click();
-        } catch (NoSuchElementException | TimeoutException e) {}
+        } catch (NoSuchElementException | TimeoutException e) {
+        }
         searchDropDown.click();
         searchField.clear();
         searchField.sendKeys("792647811", Keys.ENTER);
@@ -52,7 +53,13 @@ public class WorkQueuePage extends BasePage {
         return this;
     }
 
-    public void gotToIntentToFile(){
+    public void gotToIntentToFile() {
         intentToFileLink.click();
     }
+
+    public boolean isPageContentLoaded() {
+        return pageTitle.getText().contains("Work Queue");
+    }
+
+
 }

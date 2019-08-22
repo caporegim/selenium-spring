@@ -7,7 +7,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -16,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.Set;
 
 public abstract class BasePage extends PageActions {
 
@@ -40,7 +40,7 @@ public abstract class BasePage extends PageActions {
         return Optional.ofNullable(result).orElseThrow(() -> new RuntimeException("Clickable element returned null."));
     }
 
-    public void sleepSeconds(long seconds){
+    public void sleepSeconds(long seconds) {
         try {
             Thread.sleep(seconds * 1000);
         } catch (InterruptedException e) {
@@ -48,6 +48,22 @@ public abstract class BasePage extends PageActions {
         }
     }
 
-    public abstract String getPageUrl();
+    public abstract String getPageUrlEnd();
 
+    public boolean isPageLoaded() {
+        throw new UnsupportedOperationException("Not implemented in subclass: " + getClass());
+    }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public void goToLastOpenWindow() {
+        final Set<String> windowHandles = driver.getWindowHandles();
+        driver.switchTo().window(windowHandles.stream().skip(windowHandles.size() - 1).findFirst().orElseThrow(() -> new RuntimeException("unexpected error")));
+    }
+
+    public boolean isCurrentUrlSameAsPageUrl() {
+        return driver.getCurrentUrl().contains(getPageUrlEnd());
+    }
 }

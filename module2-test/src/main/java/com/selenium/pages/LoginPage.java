@@ -36,7 +36,7 @@ public class LoginPage extends BasePage {
     private WebElement loginButton;
 
     @Override
-    public String getPageUrl() {
+    public String getPageUrlEnd() {
         return "";
     }
 
@@ -47,7 +47,8 @@ public class LoginPage extends BasePage {
     }
 
     public void clickOnLoginUsingPassword() {
-        sendKey(okButton, Keys.SPACE);
+        sleepSeconds(1);
+        okButton.sendKeys(Keys.SPACE);
         sleepSeconds(1);
         clickOn(loginUsingPassword);
         stationId.clear();

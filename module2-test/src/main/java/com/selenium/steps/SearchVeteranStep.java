@@ -13,14 +13,20 @@ public class SearchVeteranStep {
     @Autowired
     private WorkQueuePage workQueuePage;
 
-    public SearchVeteranStep searchVeteran(){
+
+    public SearchVeteranStep searchVeteran() {
         loginPage.clickOnLoginUsingPassword();
         loginPage.sleepSeconds(2);
         workQueuePage.searchVeteran();
         return this;
     }
 
-    public void gotToIntentToFile(){
-        searchVeteran().gotToIntentToFile();
+    public void gotToIntentToFile() {
+        workQueuePage.gotToIntentToFile();
     }
+
+    public WorkQueuePage getWorkQueuePage() {
+        return workQueuePage;
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.selenium.framework.support;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +9,11 @@ import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Optional;
 
 public class LoggingWebDriverEventListener extends AbstractWebDriverEventListener {
@@ -125,7 +131,16 @@ public class LoggingWebDriverEventListener extends AbstractWebDriverEventListene
 
     @Override
     public void onException(Throwable throwable, WebDriver driver) {
-        log.info("on exception throwable=[{}]", throwable.getMessage() );
+        log.info("Exception on URL=[{}] throwable=[{}]", driver.getCurrentUrl(), throwable.getMessage() );
+        log.info("Page source contains createNewIntentToFileTemplateButton " + driver.getPageSource().contains("createNewIntentToFileTemplateButton"));
+        try {
+            final Path path = Paths.get("/users/petr.metin/selenium-debug/"+ StringUtils.substringAfterLast(driver.getCurrentUrl(), "/")+".html");
+            System.out.println(path.toAbsolutePath());
+            Files.write(path, driver.getPageSource().getBytes(), StandardOpenOption.CREATE_NEW);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

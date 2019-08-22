@@ -23,7 +23,7 @@ public class FlightStatusPage extends BasePage {
     }
 
     @Override
-    public String getPageUrl() {
+    public String getPageUrlEnd() {
         return "";
     }
 
