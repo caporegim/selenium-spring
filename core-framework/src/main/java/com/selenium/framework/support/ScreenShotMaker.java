@@ -2,7 +2,6 @@ package com.selenium.framework.support;
 
 
 import org.apache.commons.io.FileUtils;
-import org.junit.runner.Description;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -30,10 +29,10 @@ public class ScreenShotMaker {
     public void makeScreenShot(String description) {
         final TakesScreenshot screenshot = ((TakesScreenshot) webDriver);
         final File screenshotFile = screenshot.getScreenshotAs(OutputType.FILE);
-        if(pathToScreenshotFolder == null) {
+        if (pathToScreenshotFolder == null) {
             pathToScreenshotFolder = "/Users/petr.metin/";
         }
-        final String filePath = pathToScreenshotFolder + "_"+description+ "_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd:hh:ss")) + ".jpg";
+        final String filePath = pathToScreenshotFolder + "_" + description + "_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd:hh:ss")) + ".jpg";
         File destFile = new File(filePath);
         try {
             FileUtils.copyFile(screenshotFile, destFile);

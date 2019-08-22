@@ -1,6 +1,5 @@
 package com.selenium.framework.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
@@ -22,7 +21,7 @@ public abstract class PageActions {
     }
 
 
-    public void sendKey(WebElement webElement, Keys keys){
+    public void sendKey(WebElement webElement, Keys keys) {
         webElement.sendKeys(keys);
     }
 

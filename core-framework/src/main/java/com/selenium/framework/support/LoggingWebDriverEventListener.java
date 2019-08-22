@@ -18,6 +18,7 @@ import java.util.Optional;
 
 public class LoggingWebDriverEventListener extends AbstractWebDriverEventListener {
     private static final Logger log = LoggerFactory.getLogger(LoggingWebDriverEventListener.class);
+
     @Override
     public void beforeAlertAccept(WebDriver driver) {
         super.beforeAlertAccept(driver);
@@ -81,42 +82,42 @@ public class LoggingWebDriverEventListener extends AbstractWebDriverEventListene
 
     @Override
     public void beforeFindBy(By by, WebElement element, WebDriver driver) {
-        log.info("before findBy selector=[{}] element = [{}]", by, element );
+        log.info("before findBy selector=[{}] element = [{}]", by, element);
     }
 
     @Override
     public void afterFindBy(By by, WebElement element, WebDriver driver) {
-        log.info("after findBy selector=[{}] element = [{} , displayed={}]", by, element, Optional.ofNullable(element).map(e -> ""+e.isDisplayed()).orElse("IMPOSSIBLE") );
+        log.info("after findBy selector=[{}] element = [{} , displayed={}]", by, element, Optional.ofNullable(element).map(e -> "" + e.isDisplayed()).orElse("IMPOSSIBLE"));
     }
 
     @Override
     public void beforeClickOn(WebElement element, WebDriver driver) {
-        log.info("before clickOn element = [{}]", element );
+        log.info("before clickOn element = [{}]", element);
     }
 
     @Override
     public void afterClickOn(WebElement element, WebDriver driver) {
-        log.info("after clickOn element = [{}]", element );
+        log.info("after clickOn element = [{}]", element);
     }
 
     @Override
     public void beforeChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
-        log.info("before changeValue of element = [{}] to [{}]", element, keysToSend );
+        log.info("before changeValue of element = [{}] to [{}]", element, keysToSend);
     }
 
     @Override
     public void afterChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
-        log.info("after changeValue of element = [{}] to [{}]", element, keysToSend );
+        log.info("after changeValue of element = [{}] to [{}]", element, keysToSend);
     }
 
     @Override
     public void beforeScript(String script, WebDriver driver) {
-        log.info("before script script=[{}]", script );
+        log.info("before script script=[{}]", script);
     }
 
     @Override
     public void afterScript(String script, WebDriver driver) {
-        log.info("after script script=[{}]", script );
+        log.info("after script script=[{}]", script);
     }
 
     @Override
@@ -131,10 +132,10 @@ public class LoggingWebDriverEventListener extends AbstractWebDriverEventListene
 
     @Override
     public void onException(Throwable throwable, WebDriver driver) {
-        log.info("Exception on URL=[{}] throwable=[{}]", driver.getCurrentUrl(), throwable.getMessage() );
+        log.info("Exception on URL=[{}] throwable=[{}]", driver.getCurrentUrl(), throwable.getMessage());
         log.info("Page source contains createNewIntentToFileTemplateButton " + driver.getPageSource().contains("createNewIntentToFileTemplateButton"));
         try {
-            final Path path = Paths.get("/users/petr.metin/selenium-debug/"+ StringUtils.substringAfterLast(driver.getCurrentUrl(), "/")+".html");
+            final Path path = Paths.get("/users/petr.metin/selenium-debug/" + StringUtils.substringAfterLast(driver.getCurrentUrl(), "/") + ".html");
             System.out.println(path.toAbsolutePath());
             Files.write(path, driver.getPageSource().getBytes(), StandardOpenOption.CREATE_NEW);
 
