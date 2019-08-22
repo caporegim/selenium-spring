@@ -10,6 +10,8 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class DriverManager {
+    private static final Logger log = LoggerFactory.getLogger(DriverManager.class);
 
     @Value("${browser:chrome}")
     private String browser;
@@ -55,7 +58,9 @@ public class DriverManager {
                 driver = createRemoteWebDriver();
                 break;
         }
+        log.info("Configuring Driver...");
         driverConfiguration.configure(driver);
+
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         final EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(driver);
         eventFiringWebDriver.register(new LoggingWebDriverEventListener());
