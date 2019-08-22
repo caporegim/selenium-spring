@@ -58,7 +58,7 @@ public class DriverManager {
                 driver = createRemoteWebDriver();
                 break;
         }
-        log.info("Configuring Driver...");
+        log.error("Configuring Driver...");
         driverConfiguration.configure(driver);
 
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
